@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img src="./assets/urbanmind-banner.png" alt="Urbanmind-X Banner">
+</p>
 
 # UrbanMind-X
 
