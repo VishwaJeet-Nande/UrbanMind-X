@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>UrbanMind X Dashboard</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top, #0f2027, #0b1c2d);
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .panel {
+            background: rgba(19, 43, 68, 0.8);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .button-primary {
+            background: linear-gradient(90deg, #00B3FF, #007BFF);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button-secondary {
+            background: linear-gradient(90deg, #FF9800, #FF5722);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-dot {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        #campus {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            gap: 4px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="font-size: 36px; margin-top: 40px;">
+        UrbanMind X – AI Infrastructure Prototype
+    </h1>
+
+    <div class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="margin:0;">System Status</h3>
+            <span style="color:#1DB954;">
+                <span class="status-dot">●</span> AI Engine Active
+            </span>
+        </div>
+
+        <div style="margin-top:15px; display:flex; gap:20px; justify-content:center;">
+            <div>Mode: Campus Micro-City</div>
+            <div>Simulation: Multi-Agent</div>
+            <div>Optimization: Adaptive Routing</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>Scenario Configuration</h3>
+        <select style="padding:10px; border-radius:6px; background:#0E2238; color:white;">
+            <option>Normal Day</option>
+            <option>Peak Hours</option>
+            <option>Festival Mode</option>
+            <option>Emergency Evacuation</option>
+        </select>
+    </div>
+
+    <div>
+        <button onclick="runSimulation()" class="button-primary">
+            Run Traffic Optimization
+        </button>
+
+        <button onclick="runEnergy()" class="button-secondary">
+            Run Energy Simulation
+        </button>
+    </div>
+
+    <div id="campus"></div>
+
+    <div id="results" class="panel" style="margin-top:30px;"></div>
+
+    <script>
+        function createCampusGrid() {
+            const campus = document.getElementById("campus");
+            campus.innerHTML = "";
+            for (let i = 0; i < 100; i++) {
+                const cell = document.createElement("div");
+                cell.style.width = "30px";
+                cell.style.height = "30px";
+                cell.style.backgroundColor = "#1E3A5F";
+                cell.style.borderRadius = "4px";
+                campus.appendChild(cell);
+            }
+        }
+
+        function runSimulation() {
+            fetch('/run')
+                .then(response => response.json())
+                .then(data => {
+
+                    document.getElementById("results").innerHTML =
+                        "<h3>Traffic Optimization Results</h3>" +
+                        "Before Congestion: " + data.before_congestion +
+                        "<br>After Congestion: " + data.after_congestion +
+                        "<br>Improvement: " + data.improvement +
+                        "<br>Improvement %: " + data.improvement_percent + "%";
+
+                    const cells = document.getElementById("campus").children;
+                    for (let i = 0; i < cells.length; i++) {
+                        if (data.improvement_percent > 0) {
+                            let intensity = Math.min(255, 50 + data.improvement_percent * 5);
+                            cells[i].style.backgroundColor = `rgb(0, ${intensity}, 80)`;
+                        } else {
+                            let intensity = Math.min(255, 50 + Math.abs(data.improvement_percent) * 5);
+                            cells[i].style.backgroundColor = `rgb(${intensity}, 0, 0)`;
+                        }
+                    }
+                });
+        }
+
+        function runEnergy() {
+            fetch('/energy')
+                .then(response => response.json())
+                .then(data => {
+
+                    let html = "<h3>Energy Simulation Results</h3>";
+                    html += "Peak Load: " + data.peak_load + "<br>";
+                    html += "Average Load: " + data.average_load + "<br><br>";
+
+                    document.getElementById("results").innerHTML = html;
+                });
+        }
+
+        createCampusGrid();
+    </script>
+
+</body>
+</html>
