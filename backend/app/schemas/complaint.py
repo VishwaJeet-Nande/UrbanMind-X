@@ -6,7 +6,7 @@ class CreateComplaintRequest(BaseModel):
     description: str
     latitude: float
     longitude: float
-
+    ward_name: str
 
 class ComplaintResponse(BaseModel):
     id: str

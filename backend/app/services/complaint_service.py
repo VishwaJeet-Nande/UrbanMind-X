@@ -30,7 +30,8 @@ def create_complaint(
         ],
 
         latitude=complaint_data.latitude,
-        longitude=complaint_data.longitude
+        longitude=complaint_data.longitude,
+        ward_name=complaint_data.ward_name,
     )
 
     db.add(complaint)

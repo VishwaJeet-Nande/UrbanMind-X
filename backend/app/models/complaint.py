@@ -64,6 +64,10 @@ class Complaint(Base):
         default="reported"
     )
 
+    ward_name: Mapped[str] = mapped_column(
+        String(100),
+        default="Ward 1"
+    )
     latitude: Mapped[float] = mapped_column(
         Float
     )
