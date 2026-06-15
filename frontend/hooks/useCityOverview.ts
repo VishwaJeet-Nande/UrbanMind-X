@@ -21,14 +21,18 @@ export function useCityOverview() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response =
-          await api.get(
-            "/api/v1/digital-twin/city-overview"
-          );
+        const response = await api.get(
+          "/api/v1/digital-twin/city-overview"
+        );
 
         setData(response.data);
       } catch (error) {
-        console.error(error);
+        console.error(
+          "City overview error:",
+          error
+        );
+
+        setData(null);
       } finally {
         setLoading(false);
       }
