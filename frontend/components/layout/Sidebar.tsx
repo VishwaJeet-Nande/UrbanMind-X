@@ -4,6 +4,7 @@ import {
   Map,
   BrainCircuit,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function Sidebar() {
   return (
@@ -17,25 +18,25 @@ export default function Sidebar() {
       </p>
 
       <div className="mt-12 space-y-6">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <LayoutDashboard size={20} />
           Dashboard
-        </div>
+        </Link>
 
-        <div className="flex items-center gap-3">
+        <Link href="/risks" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <AlertTriangle size={20} />
           Risks
-        </div>
+        </Link>
 
-        <div className="flex items-center gap-3">
+        <Link href="/digital-twin" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <Map size={20} />
           Digital Twin
-        </div>
+        </Link>
 
-        <div className="flex items-center gap-3">
+        <Link href="/assistant" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <BrainCircuit size={20} />
           AI Assistant
-        </div>
+        </Link>
       </div>
     </aside>
   );

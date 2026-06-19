@@ -20,6 +20,13 @@ export function useCityOverview() {
 
   useEffect(() => {
     async function fetchData() {
+      const token = localStorage.getItem("access_token");
+
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+      
       try {
         const response = await api.get(
           "/api/v1/digital-twin/city-overview"

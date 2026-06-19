@@ -9,10 +9,31 @@ import {
   TileLayer,
 } from "react-leaflet";
 
-import { useComplaintPoints } from "@/hooks/useComplaintPoints";
 
 export default function DigitalTwinMap() {
-  const { data } = useComplaintPoints();
+  const complaintPoints = [
+  {
+    id: 1,
+    title: "Water Leakage",
+    latitude: 20.708,
+    longitude: 76.568,
+    severity: 8,
+  },
+  {
+    id: 2,
+    title: "Road Damage",
+    latitude: 20.706,
+    longitude: 76.572,
+    severity: 6,
+  },
+  {
+    id: 3,
+    title: "Streetlight Failure",
+    latitude: 20.710,
+    longitude: 76.575,
+    severity: 5,
+  },
+];
 
   return (
     <div className="glass glow rounded-2xl overflow-hidden">
@@ -35,7 +56,7 @@ export default function DigitalTwinMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {data.map((point) => (
+        {complaintPoints.map((point) => (
           <Marker
             key={point.id}
             position={[
@@ -50,19 +71,7 @@ export default function DigitalTwinMap() {
                 </h3>
 
                 <p>
-                  Ward: {point.ward_name}
-                </p>
-
-                <p>
-                  Priority:
-                  {" "}
-                  {point.priority}
-                </p>
-
-                <p>
-                  Severity:
-                  {" "}
-                  {point.severity_score}
+                  Severity: {point.severity}
                 </p>
               </div>
             </Popup>
