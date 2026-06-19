@@ -3,6 +3,7 @@ import {
   AlertTriangle,
   Map,
   BrainCircuit,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -21,6 +22,11 @@ export default function Sidebar() {
         <Link href="/" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <LayoutDashboard size={20} />
           Dashboard
+        </Link>
+         
+        <Link href="/report" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+          <FileText size={20} />
+          Report Complaint
         </Link>
 
         <Link href="/risks" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
