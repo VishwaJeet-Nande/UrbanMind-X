@@ -8,6 +8,7 @@ export interface CreateComplaintRequest {
 
 export interface Complaint {
   id: string;
+
   title: string;
   description: string;
 
@@ -19,9 +20,5 @@ export interface Complaint {
 
   recommended_department: string;
 
-  latitude: number;
-  longitude: number;
-
-  ward_name: string;
   status: string;
 }

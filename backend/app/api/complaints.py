@@ -12,15 +12,16 @@ from app.database.dependencies import (
 from app.models.user import User
 
 from app.schemas.complaint import (
-    CreateComplaintRequest
+    CreateComplaintRequest,
+    UpdateComplaintStatusRequest
 )
 
 from app.services.complaint_service import (
     create_complaint,
     get_complaints,
-    get_complaint_by_id
+    get_complaint_by_id,
+    update_complaint_status
 )
-
 
 router = APIRouter(
     prefix="/api/v1/complaints",
@@ -32,7 +33,9 @@ router = APIRouter(
 def create_new_complaint(
     complaint_data: CreateComplaintRequest,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(
+        get_current_user
+    )
 ):
     complaint = create_complaint(
         db,
@@ -46,7 +49,9 @@ def create_new_complaint(
 @router.get("/")
 def list_complaints(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(
+        get_current_user
+    )
 ):
     return get_complaints(db)
 
@@ -55,11 +60,37 @@ def list_complaints(
 def get_single_complaint(
     complaint_id: str,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(
+        get_current_user
+    )
 ):
     complaint = get_complaint_by_id(
         db,
         complaint_id
+    )
+
+    if not complaint:
+        raise HTTPException(
+            status_code=404,
+            detail="Complaint not found"
+        )
+
+    return complaint
+
+
+@router.patch("/{complaint_id}/status")
+def update_status(
+    complaint_id: str,
+    payload: UpdateComplaintStatusRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(
+        get_current_user
+    )
+):
+    complaint = update_complaint_status(
+        db,
+        complaint_id,
+        payload.status
     )
 
     if not complaint:

@@ -4,6 +4,7 @@ import {
   Map,
   BrainCircuit,
   FileText,
+  ClipboardList,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +29,11 @@ export default function Sidebar() {
           <FileText size={20} />
           Report Complaint
         </Link>
-
+       <Link href="/complaints"className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+         <ClipboardList size={20} />
+         Complaints
+       </Link>
+       
         <Link href="/risks" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <AlertTriangle size={20} />
           Risks

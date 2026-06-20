@@ -1,3 +1,5 @@
+from typing import Literal
+
 from pydantic import BaseModel
 
 
@@ -8,8 +10,21 @@ class CreateComplaintRequest(BaseModel):
     longitude: float
     ward_name: str
 
+
+class UpdateComplaintStatusRequest(BaseModel):
+    status: Literal[
+        "reported",
+        "verified",
+        "assigned",
+        "in_progress",
+        "resolved",
+        "closed"
+    ]
+
+
 class ComplaintResponse(BaseModel):
     id: str
+
     title: str
     description: str
 
