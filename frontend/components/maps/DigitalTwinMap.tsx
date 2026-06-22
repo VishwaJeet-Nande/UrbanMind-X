@@ -94,8 +94,8 @@ export default function DigitalTwinMap({
         }}
       >
         <TileLayer
-          attribution="OpenStreetMap"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution="CartoDB"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
 
         {filteredPoints.map((point) => (
@@ -107,8 +107,8 @@ export default function DigitalTwinMap({
             ]}
           >
             <Popup>
-              <div className="min-w-[220px]">
-                <h3 className="font-bold text-lg mb-2">
+              <div className="w-[180px]">
+                <h3 className="font-bold text-lg mb-2 text-cyan-400">
                   🚨 {point.title}
                 </h3>
 

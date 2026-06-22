@@ -54,3 +54,21 @@ body {
     0 0 15px rgba(0, 229, 255, 0.15),
     0 0 40px rgba(0, 229, 255, 0.08);
 }
+
+.leaflet-popup-content-wrapper {
+  background: #0b1220 !important;
+  color: white !important;
+  border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+.leaflet-popup-tip {
+  background: #0b1220 !important;
+}
+
+.leaflet-popup-content {
+  color: white !important;
+}
+
+.leaflet-container a {
+  color: #22d3ee !important;
+}
