@@ -2,6 +2,8 @@
 
 import { useCityOverview } from "@/hooks/useCityOverview";
 import { useRiskAnalysis } from "@/hooks/useRiskAnalysis";
+import RiskScoreChart from "@/components/charts/RiskScoreChart";
+import ComplaintsChart from "@/components/charts/ComplaintsChart";
 
 export default function LeadershipPage() {
   const {
@@ -41,7 +43,7 @@ export default function LeadershipPage() {
       </p>
 
       {/* KPI CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-10">
+      <div className="grid md:grid-cols-5 gap-6 mt-10">
         <div className="glass p-5 rounded-2xl">
           <p className="text-slate-400">
             Total Complaints
@@ -87,7 +89,17 @@ export default function LeadershipPage() {
           </h2>
         </div>
       </div>
+      
+      <div className="grid lg:grid-cols-2 gap-6 mt-10">
+        <RiskScoreChart
+          data={sortedRisks}
+         />
 
+        <ComplaintsChart
+         data={sortedRisks}
+         />
+      </div>
+      
       {/* WARD TABLE */}
       <div className="glass rounded-2xl p-6 mt-10">
         <h2 className="text-2xl font-bold mb-5">

@@ -1,3 +1,8 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import {
   LayoutDashboard,
   AlertTriangle,
@@ -5,12 +10,21 @@ import {
   BrainCircuit,
   FileText,
   ClipboardList,
+  FolderOpen,
   BarChart3,
 } from "lucide-react";
-import Link from "next/link";
-import { FolderOpen } from "lucide-react";
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
+  const navClass = (href: string) =>
+    `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300
+    ${
+      pathname === href
+        ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+        : "hover:bg-slate-800 hover:text-cyan-400"
+    }`;
+
   return (
     <aside className="w-72 h-screen glass border-r border-cyan-500/10 p-6">
       <h1 className="text-3xl font-bold text-cyan-400">
@@ -21,47 +35,67 @@ export default function Sidebar() {
         Predict. Simulate. Optimize.
       </p>
 
-      <div className="mt-12 space-y-6">
-        <Link href="/" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+      <div className="mt-12 space-y-3">
+        <Link href="/" className={navClass("/")}>
           <LayoutDashboard size={20} />
           Dashboard
         </Link>
-         
-        <Link href="/report" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+
+        <Link
+          href="/report"
+          className={navClass("/report")}
+        >
           <FileText size={20} />
           Report Complaint
         </Link>
-        
-        <Link href="/my-complaints" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+
+        <Link
+          href="/my-complaints"
+          className={navClass("/my-complaints")}
+        >
           <FolderOpen size={20} />
-           My Complaints
+          My Complaints
         </Link>
 
-       <Link href="/complaints"className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
-         <ClipboardList size={20} />
-         Complaints
-       </Link>
-       
-        <Link href="/risks" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+        <Link
+          href="/complaints"
+          className={navClass("/complaints")}
+        >
+          <ClipboardList size={20} />
+          Complaints
+        </Link>
+
+        <Link
+          href="/risks"
+          className={navClass("/risks")}
+        >
           <AlertTriangle size={20} />
           Risks
         </Link>
 
-        <Link href="/digital-twin" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+        <Link
+          href="/digital-twin"
+          className={navClass("/digital-twin")}
+        >
           <Map size={20} />
           Digital Twin
         </Link>
 
-        <Link href="/leadership" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+        <Link
+          href="/leadership"
+          className={navClass("/leadership")}
+        >
           <BarChart3 size={20} />
           Leadership Dashboard
         </Link>
 
-        <Link href="/assistant" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+        <Link
+          href="/assistant"
+          className={navClass("/assistant")}
+        >
           <BrainCircuit size={20} />
           AI Assistant
         </Link>
-        
       </div>
     </aside>
   );
