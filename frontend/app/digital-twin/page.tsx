@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import Sidebar from "@/components/layout/Sidebar";
 import AuthGuard from "@/components/auth/AuthGuard";
 
@@ -11,6 +13,13 @@ import { useCityOverview } from "@/hooks/useCityOverview";
 
 export default function DigitalTwinPage() {
   const { data } = useCityOverview();
+
+  const [filters, setFilters] = useState({
+    highPriority: true,
+    water: true,
+    road: true,
+    streetlight: true,
+  });
 
   return (
     <AuthGuard>
@@ -29,12 +38,20 @@ export default function DigitalTwinPage() {
 
           <div className="grid grid-cols-12 gap-6 mt-8">
             <div className="col-span-2">
-              <FilterPanel />
+              <FilterPanel
+                filters={filters}
+                onChange={(key) =>
+                  setFilters((prev) => ({
+                    ...prev,
+                    [key]: !prev[key],
+                  }))
+                }
+              />
             </div>
 
             <div className="col-span-7">
               <div className="glass glow rounded-2xl p-4">
-                <MapWrapper />
+                <MapWrapper filters={filters} />
               </div>
             </div>
 

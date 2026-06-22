@@ -9,14 +9,22 @@ import {
   TileLayer,
 } from "react-leaflet";
 
-
-
 import {
   useComplaintPoints,
 } from "@/hooks/useComplaintPoints";
-import HeatLayer from "./HeatLayer";
 
-export default function DigitalTwinMap() {
+interface Props {
+  filters?: {
+    highPriority: boolean;
+    water: boolean;
+    road: boolean;
+    streetlight: boolean;
+  };
+}
+
+export default function DigitalTwinMap({
+  filters,
+}: Props) {
   const {
     data: complaintPoints,
     loading,
@@ -51,10 +59,6 @@ export default function DigitalTwinMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <HeatLayer
-          points={complaintPoints}
-        />
-
         {complaintPoints.map((point) => (
           <Marker
             key={point.id}
@@ -64,40 +68,40 @@ export default function DigitalTwinMap() {
             ]}
           >
             <Popup>
-  <div className="min-w-[220px]">
-    <h3 className="font-bold text-lg mb-2">
-      🚨 {point.title}
-    </h3>
+              <div className="min-w-[220px]">
+                <h3 className="font-bold text-lg mb-2">
+                  🚨 {point.title}
+                </h3>
 
-    <div className="space-y-1 text-sm">
-      <p>
-        <strong>Ward:</strong>{" "}
-        {point.ward_name}
-      </p>
+                <div className="space-y-1 text-sm">
+                  <p>
+                    <strong>Ward:</strong>{" "}
+                    {point.ward_name}
+                  </p>
 
-      <p>
-        <strong>Severity:</strong>{" "}
-        {point.severity_score}/10
-      </p>
+                  <p>
+                    <strong>Severity:</strong>{" "}
+                    {point.severity_score}/10
+                  </p>
 
-      <p>
-        <strong>Priority:</strong>{" "}
-        {point.priority}
-      </p>
+                  <p>
+                    <strong>Priority:</strong>{" "}
+                    {point.priority}
+                  </p>
 
-      <hr className="my-2" />
+                  <hr className="my-2" />
 
-      <p className="font-semibold text-cyan-600">
-        AI Recommendation
-      </p>
+                  <p className="font-semibold text-cyan-600">
+                    AI Recommendation
+                  </p>
 
-      <p>
-        Immediate inspection
-        recommended.
-      </p>
-    </div>
-  </div>
-</Popup>
+                  <p>
+                    Immediate inspection
+                    recommended.
+                  </p>
+                </div>
+              </div>
+            </Popup>
           </Marker>
         ))}
       </MapContainer>
