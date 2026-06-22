@@ -7,6 +7,7 @@ import {
   ClipboardList,
 } from "lucide-react";
 import Link from "next/link";
+import { FolderOpen } from "lucide-react";
 
 export default function Sidebar() {
   return (
@@ -29,6 +30,12 @@ export default function Sidebar() {
           <FileText size={20} />
           Report Complaint
         </Link>
+        
+        <Link href="/my-complaints" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+          <FolderOpen size={20} />
+           My Complaints
+        </Link>
+
        <Link href="/complaints"className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
          <ClipboardList size={20} />
          Complaints

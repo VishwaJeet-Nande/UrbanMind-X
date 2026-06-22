@@ -19,6 +19,7 @@ from app.schemas.complaint import (
 from app.services.complaint_service import (
     create_complaint,
     get_complaints,
+    get_user_complaints,
     get_complaint_by_id,
     update_complaint_status
 )
@@ -55,6 +56,17 @@ def list_complaints(
 ):
     return get_complaints(db)
 
+@router.get("/my")
+def my_complaints(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(
+        get_current_user
+    )
+):
+    return get_user_complaints(
+        db,
+        current_user.id
+    )
 
 @router.get("/{complaint_id}")
 def get_single_complaint(

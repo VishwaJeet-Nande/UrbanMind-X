@@ -26,6 +26,16 @@ export async function getComplaints(): Promise<
   return response.data;
 }
 
+export async function getMyComplaints(): Promise<
+  Complaint[]
+> {
+  const response = await api.get(
+    "/api/v1/complaints/my"
+  );
+
+  return response.data;
+}
+
 export async function getComplaintById(
   complaintId: string
 ): Promise<Complaint> {

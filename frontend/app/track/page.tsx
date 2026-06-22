@@ -8,6 +8,16 @@ import {
 
 import { Complaint } from "@/types/complaint";
 
+
+const STATUS_FLOW = [
+  "reported",
+  "verified",
+  "assigned",
+  "in_progress",
+  "resolved",
+  "closed",
+];
+
 export default function TrackPage() {
   const [id, setId] =
     useState("");
@@ -104,7 +114,43 @@ export default function TrackPage() {
                 <strong>Ward:</strong>{" "}
                 {complaint.ward_name}
               </p>
-            </div>
+
+            <div className="mt-8">
+               <h3 className="text-xl font-bold mb-4">
+                 Complaint Timeline
+           </h3>
+
+           <div className="space-y-3">
+             {STATUS_FLOW.map((step) => {
+               const currentIndex =
+                 STATUS_FLOW.indexOf(
+                   complaint.status
+                 );
+
+               const stepIndex =
+                 STATUS_FLOW.indexOf(step);
+
+               const completed =
+                 stepIndex <= currentIndex;
+
+               return (
+                 <div
+                   key={step}
+                   className="flex items-center gap-3"
+                 >
+                   <span>
+                     {completed ? "✅" : "⬜"}
+                   </span>
+
+                   <span className="capitalize">
+                     {step.replace("_", " ")}
+                   </span>
+                 </div>
+               );
+             })}
+          </div>
+        </div>
+              </div>
           </div>
         )}
       </div>

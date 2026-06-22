@@ -6,7 +6,6 @@ from app.schemas.complaint import (
     CreateComplaintRequest
 )
 
-
 from app.services.ai_complaint_service import (
     analyze_complaint
 )
@@ -27,29 +26,22 @@ def create_complaint(
         user_id=user_id,
         title=complaint_data.title,
         description=complaint_data.description,
-
         category=ai_result["category"],
         ai_category=ai_result["category"],
-
         priority=ai_result["priority"],
         severity_score=ai_result[
             "severity_score"
         ],
-
         recommended_department=ai_result[
             "recommended_department"
         ],
-
         latitude=complaint_data.latitude,
         longitude=complaint_data.longitude,
-
         ward_name=complaint_data.ward_name,
     )
 
     db.add(complaint)
-
     db.commit()
-
     db.refresh(complaint)
 
     return complaint
@@ -59,6 +51,22 @@ def get_complaints(
     db: Session
 ):
     return db.query(Complaint).all()
+
+
+def get_user_complaints(
+    db: Session,
+    user_id: str
+):
+    return (
+        db.query(Complaint)
+        .filter(
+            Complaint.user_id == user_id
+        )
+        .order_by(
+            Complaint.created_at.desc()
+        )
+        .all()
+    )
 
 
 def get_complaint_by_id(
@@ -93,7 +101,6 @@ def update_complaint_status(
     complaint.status = status
 
     db.commit()
-
     db.refresh(complaint)
 
     return complaint
