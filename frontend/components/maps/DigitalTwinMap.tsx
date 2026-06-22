@@ -29,6 +29,45 @@ export default function DigitalTwinMap({
     data: complaintPoints,
     loading,
   } = useComplaintPoints();
+  const filteredPoints = complaintPoints.filter(
+  (point: any) => {
+    if (
+      filters?.highPriority === false &&
+      point.priority === "High"
+    ) {
+      return false;
+    }
+
+    const title =
+      point.title?.toLowerCase() || "";
+
+    if (
+      filters?.water === false &&
+      title.includes("water")
+    ) {
+      return false;
+    }
+
+    if (
+      filters?.road === false &&
+      title.includes("road")
+    ) {
+      return false;
+    }
+
+    if (
+      filters?.streetlight === false &&
+      (
+        title.includes("streetlight") ||
+        title.includes("light")
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+);
 
   if (loading) {
     return (
@@ -59,7 +98,7 @@ export default function DigitalTwinMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {complaintPoints.map((point) => (
+        {filteredPoints.map((point) => (
           <Marker
             key={point.id}
             position={[
