@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 
 import { Complaint } from "@/types/complaint";
-import { updateComplaintStatus } from "@/services/complaint";
+
+import {
+  updateComplaintStatus,
+} from "@/services/complaint";
 
 interface Props {
   complaint: Complaint | null;

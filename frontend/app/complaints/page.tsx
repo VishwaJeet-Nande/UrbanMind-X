@@ -23,6 +23,11 @@ export default function ComplaintsPage() {
     null
   );
 
+  console.log(
+    "CURRENT SELECTED:",
+    selectedComplaint
+  );
+
   return (
     <AuthGuard>
       <main className="flex min-h-screen">
@@ -46,9 +51,16 @@ export default function ComplaintsPage() {
               <div className="col-span-2">
                 <ComplaintTable
                   complaints={data}
-                  onSelect={
-                    setSelectedComplaint
-                  }
+                  onSelect={(complaint) => {
+                    console.log(
+                      "SELECTED:",
+                      complaint
+                    );
+
+                    setSelectedComplaint(
+                      complaint
+                    );
+                  }}
                 />
               </div>
 
