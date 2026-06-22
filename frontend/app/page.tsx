@@ -65,7 +65,14 @@ export default function Home() {
               </div>
 
               <div className="mt-10">
-                <MapWrapper />
+                <MapWrapper
+                  filters={{
+                  highPriority: true,
+                  water: true,
+                  road: true,
+                  streetlight: true,
+                   }}
+                />
               </div>
             </>
           )}
