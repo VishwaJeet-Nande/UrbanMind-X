@@ -10,36 +10,31 @@ import {
 } from "react-leaflet";
 
 
+
+import {
+  useComplaintPoints,
+} from "@/hooks/useComplaintPoints";
+import HeatLayer from "./HeatLayer";
+
 export default function DigitalTwinMap() {
-  const complaintPoints = [
-  {
-    id: 1,
-    title: "Water Leakage",
-    latitude: 20.708,
-    longitude: 76.568,
-    severity: 8,
-  },
-  {
-    id: 2,
-    title: "Road Damage",
-    latitude: 20.706,
-    longitude: 76.572,
-    severity: 6,
-  },
-  {
-    id: 3,
-    title: "Streetlight Failure",
-    latitude: 20.710,
-    longitude: 76.575,
-    severity: 5,
-  },
-];
+  const {
+    data: complaintPoints,
+    loading,
+  } = useComplaintPoints();
+
+  if (loading) {
+    return (
+      <div className="glass p-8 rounded-2xl">
+        Loading Digital Twin...
+      </div>
+    );
+  }
 
   return (
     <div className="glass glow rounded-2xl overflow-hidden">
       <div className="p-4 border-b border-slate-800">
         <h2 className="text-xl font-bold">
-          Digital Twin City Map
+          Digital Twin Command Center
         </h2>
       </div>
 
@@ -47,7 +42,7 @@ export default function DigitalTwinMap() {
         center={[20.7074, 76.5688]}
         zoom={13}
         style={{
-          height: "500px",
+          height: "600px",
           width: "100%",
         }}
       >
@@ -56,6 +51,10 @@ export default function DigitalTwinMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        <HeatLayer
+          points={complaintPoints}
+        />
+        
         {complaintPoints.map((point) => (
           <Marker
             key={point.id}
@@ -71,7 +70,21 @@ export default function DigitalTwinMap() {
                 </h3>
 
                 <p>
-                  Severity: {point.severity}
+                  Ward:
+                  {" "}
+                  {point.ward_name}
+                </p>
+
+                <p>
+                  Severity:
+                  {" "}
+                  {point.severity_score}
+                </p>
+
+                <p>
+                  Priority:
+                  {" "}
+                  {point.priority}
                 </p>
               </div>
             </Popup>

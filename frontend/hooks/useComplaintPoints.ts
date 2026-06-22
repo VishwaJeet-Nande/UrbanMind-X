@@ -1,25 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import api from "@/services/api";
-import { ComplaintPoint } from "@/types/map";
+
+export interface ComplaintPoint {
+  id: string;
+  title: string;
+  ward_name: string;
+  latitude: number;
+  longitude: number;
+  severity_score: number;
+  priority: string;
+}
 
 export function useComplaintPoints() {
-  const [data, setData] = useState<ComplaintPoint[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] =
+    useState<ComplaintPoint[]>([]);
+
+  const [loading, setLoading] =
+    useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      const token = localStorage.getItem("access_token");
-
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+    async function load() {
       try {
-        const response = await api.get(
-          "/api/v1/digital-twin/complaint-points"
-        );
+        const response =
+          await api.get(
+            "/api/v1/digital-twin/complaint-points"
+          );
 
         setData(response.data);
       } catch (error) {
@@ -29,8 +37,11 @@ export function useComplaintPoints() {
       }
     }
 
-    fetchData();
+    load();
   }, []);
 
-  return { data, loading };
+  return {
+    data,
+    loading,
+  };
 }

@@ -99,7 +99,7 @@ export default function LeadershipPage() {
          data={sortedRisks}
          />
       </div>
-      
+
       {/* WARD TABLE */}
       <div className="glass rounded-2xl p-6 mt-10">
         <h2 className="text-2xl font-bold mb-5">
@@ -160,43 +160,60 @@ export default function LeadershipPage() {
           Strategic Insights
         </h2>
 
-        <div className="space-y-3 text-slate-300">
-          <p>
-            • City Risk Score currently stands
-            at{" "}
-            <strong>
-              {overview?.city_risk_score ?? 0}
-            </strong>
-            .
-          </p>
+        <div className="grid md:grid-cols-2 gap-4">
 
-          <p>
-            • Highest risk concentration is
-            detected in{" "}
-            <strong>
-              {highestRiskWard}
-            </strong>
-            .
-          </p>
+  <div className="glass p-5 rounded-xl border border-cyan-500/10">
+    <p className="text-cyan-400 font-semibold">
+      City Risk Score
+    </p>
 
-          <p>
-            • There are currently{" "}
-            <strong>
-              {overview?.high_risk_wards ?? 0}
-            </strong>{" "}
-            high-risk wards requiring
-            operational attention.
-          </p>
+    <p className="mt-2 text-slate-300">
+      Current city risk score is
+      <strong>
+        {" "}
+        {overview?.city_risk_score ?? 0}
+      </strong>
+      .
+    </p>
+  </div>
 
-          <p>
-            • Total complaints recorded:
-            {" "}
-            <strong>
-              {overview?.total_complaints ?? 0}
-            </strong>
-            .
-          </p>
-        </div>
+  <div className="glass p-5 rounded-xl border border-red-500/10">
+    <p className="text-red-400 font-semibold">
+      Highest Risk Ward
+    </p>
+
+    <p className="mt-2 text-slate-300">
+      {highestRiskWard} currently has the
+      highest risk concentration.
+    </p>
+  </div>
+
+  <div className="glass p-5 rounded-xl border border-yellow-500/10">
+    <p className="text-yellow-400 font-semibold">
+      High Risk Wards
+    </p>
+
+    <p className="mt-2 text-slate-300">
+      {overview?.high_risk_wards ?? 0} wards
+      require operational attention.
+    </p>
+  </div>
+
+  <div className="glass p-5 rounded-xl border border-green-500/10">
+    <p className="text-green-400 font-semibold">
+      Complaint Volume
+    </p>
+
+    <p className="mt-2 text-slate-300">
+      Total complaints recorded:
+      <strong>
+        {" "}
+        {overview?.total_complaints ?? 0}
+      </strong>
+    </p>
+  </div>
+
+</div>
       </div>
     </main>
   );

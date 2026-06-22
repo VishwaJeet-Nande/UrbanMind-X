@@ -11,7 +11,7 @@ import {
   FileText,
   ClipboardList,
   FolderOpen,
-  BarChart3,
+  ChartNoAxesColumn,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -85,7 +85,7 @@ export default function Sidebar() {
           href="/leadership"
           className={navClass("/leadership")}
         >
-          <BarChart3 size={20} />
+          <ChartNoAxesColumn size={20} />
           Leadership Dashboard
         </Link>
 
