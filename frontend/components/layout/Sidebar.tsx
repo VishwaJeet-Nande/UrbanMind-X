@@ -5,6 +5,7 @@ import {
   BrainCircuit,
   FileText,
   ClipboardList,
+  BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import { FolderOpen } from "lucide-react";
@@ -51,10 +52,16 @@ export default function Sidebar() {
           Digital Twin
         </Link>
 
+        <Link href="/leadership" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
+          <BarChart3 size={20} />
+          Leadership Dashboard
+        </Link>
+
         <Link href="/assistant" className="flex items-center gap-3 hover:text-cyan-400 transition-colors cursor-pointer">
           <BrainCircuit size={20} />
           AI Assistant
         </Link>
+        
       </div>
     </aside>
   );
