@@ -54,7 +54,7 @@ export default function DigitalTwinMap() {
         <HeatLayer
           points={complaintPoints}
         />
-        
+
         {complaintPoints.map((point) => (
           <Marker
             key={point.id}
@@ -64,30 +64,40 @@ export default function DigitalTwinMap() {
             ]}
           >
             <Popup>
-              <div>
-                <h3 className="font-bold">
-                  {point.title}
-                </h3>
+  <div className="min-w-[220px]">
+    <h3 className="font-bold text-lg mb-2">
+      🚨 {point.title}
+    </h3>
 
-                <p>
-                  Ward:
-                  {" "}
-                  {point.ward_name}
-                </p>
+    <div className="space-y-1 text-sm">
+      <p>
+        <strong>Ward:</strong>{" "}
+        {point.ward_name}
+      </p>
 
-                <p>
-                  Severity:
-                  {" "}
-                  {point.severity_score}
-                </p>
+      <p>
+        <strong>Severity:</strong>{" "}
+        {point.severity_score}/10
+      </p>
 
-                <p>
-                  Priority:
-                  {" "}
-                  {point.priority}
-                </p>
-              </div>
-            </Popup>
+      <p>
+        <strong>Priority:</strong>{" "}
+        {point.priority}
+      </p>
+
+      <hr className="my-2" />
+
+      <p className="font-semibold text-cyan-600">
+        AI Recommendation
+      </p>
+
+      <p>
+        Immediate inspection
+        recommended.
+      </p>
+    </div>
+  </div>
+</Popup>
           </Marker>
         ))}
       </MapContainer>
