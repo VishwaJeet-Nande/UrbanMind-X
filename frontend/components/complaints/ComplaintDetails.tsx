@@ -45,6 +45,8 @@ export default function ComplaintDetails({
   }
 
   async function handleUpdateStatus() {
+    if (!complaint) return;
+
     try {
       setSaving(true);
 

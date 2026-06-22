@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import {
@@ -49,38 +50,40 @@ export default function MyComplaintsPage() {
         <div className="mt-10 space-y-4">
           {complaints.map(
             (complaint) => (
-              <div
+              <Link
                 key={complaint.id}
-                className="glass p-5 rounded-2xl"
+                href={`/my-complaints/${complaint.id}`}
               >
-                <h2 className="text-xl font-bold">
-                  {complaint.title}
-                </h2>
+                <div className="glass p-5 rounded-2xl hover:border-cyan-500 border border-transparent transition cursor-pointer">
+                  <h2 className="text-xl font-bold">
+                    {complaint.title}
+                  </h2>
 
-                <div className="mt-3 space-y-1 text-sm">
-                  <p>
-                    Status:{" "}
-                    {complaint.status}
-                  </p>
+                  <div className="mt-3 space-y-1 text-sm">
+                    <p>
+                      Status:{" "}
+                      {complaint.status}
+                    </p>
 
-                  <p>
-                    Priority:{" "}
-                    {complaint.priority}
-                  </p>
+                    <p>
+                      Priority:{" "}
+                      {complaint.priority}
+                    </p>
 
-                  <p>
-                    Department:{" "}
-                    {
-                      complaint.recommended_department
-                    }
-                  </p>
+                    <p>
+                      Department:{" "}
+                      {
+                        complaint.recommended_department
+                      }
+                    </p>
 
-                  <p>
-                    Ward:{" "}
-                    {complaint.ward_name}
-                  </p>
+                    <p>
+                      Ward:{" "}
+                      {complaint.ward_name}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
             )
           )}
         </div>
